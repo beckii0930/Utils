@@ -1,23 +1,26 @@
-## VMD Make Movie:
-# Extension -> Visualization -> Movie Maker
-# Movie setting: Trajectory for .xyz file
-# Format: JPEG frames if imagemagick is installed. Otherwise, follow ppm to png conversion below.
-
-## Quick Time: make movie file 
-# File -> Open Image sequence -> load the jpeg image files -> save movie
-
 #################################################################################################
 ## Download imageMagick for MAC to convert image file types
 brew install ghostscript
 brew install imagemagick
 
-## Put files below into ppm2jpg.sh, then chmod 777 ppm2jpg.sh
+#################################################################################################
+## VMD Make Movie:
+# Extension -> Visualization -> Movie Maker
+# Movie setting tab: Trajectory for .xyz file
+# Format tab: JPEG frames if imagemagick is installed.
+
+## Quick Time: make movie file 
+# File -> Open Image sequence -> load the jpeg image files -> save movie
+
+#################################################################################################
+## Image File Type conversion (.ppm to .png) with "convert" command in imagemagick
+## Put code below into ppm2png.sh, then chmod 777 ppm2png.sh, last ./ppm2png to run
 ## Modify the cd PATH to ppm file folder 
 
 #!/bin/sh
 # ppm2jpg.sh
 # converts ppm files in Frames/ to png's
-cd ./
+cd /PATH_TO_PPM
 for f in *.ppm
 do
     convert $f ${f%ppm}png

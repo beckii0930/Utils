@@ -1,0 +1,11 @@
+git clone https://github.com/Theano/libgpuarray.git
+cd libgpuarray
+mkdir Build
+cd Build
+
+cmake .. -DCMAKE_C_COMPILER=/spack/apps/gcc/8.3.0/bin/gcc -DCMAKE_CXX_COMPILER=/spack/apps/gcc/8.3.0/bin/g++
+make
+sudo make install
+cd ..
+sudo apt-get install cython
+sudo apt-get install python-numpy python-scipy python-dev python-pip python-nose g++ libopenblas-dev git

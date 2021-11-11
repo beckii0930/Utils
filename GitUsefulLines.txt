@@ -1,3 +1,7 @@
 ## Force pull
 git fetch --all
 git reset --hard origin/main
+
+## git untrack files
+git rm --cached *.txt
+ git check-ignore -v debug.test

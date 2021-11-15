@@ -2,3 +2,4 @@ PyMOL>set label_size, -2
 PyMOL>set label_font_id,12
 PyMOL>set label_font_id,10
 PyMOL>set label_position, (0, 0, 20)
+set stick_radius,0.5

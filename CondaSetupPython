@@ -1,4 +1,4 @@
-## conda is an enviroment manager for python packages
+## conda is an enviroment manager for Python packages. Here, I show how to run jobs with GPU using conda.
 
 # init an environment to run GPU
 conda init bash

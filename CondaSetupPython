@@ -4,16 +4,16 @@
 conda init bash
 conda create -n gpuenv
 
+# activate an env from conda
+. ~/.bashrc
+conda activate gpuenv
+conda deactivate gpuenv
+
 #download package with specific version 
 conda install scipy=1.1.0 sklearn=0.20.1 theano=1.0.3 keras=2.2.4 
 
 #Example packages for gpuenv that I need. You can install packages needed for your application.
 conda install -c conda-forge scipy scikit-learn keras pandas h5py matplotlib cudatoolkit cudnn tensorflow-gpu
-
-# activate an env from conda
-. ~/.bashrc
-conda activate gpuenv
-conda deactivate gpuenv
 
 # Check list of packages
 conda env list

@@ -4,6 +4,10 @@
 conda init bash
 conda create -n gpuenv
 
+# Rename/clone an existing env
+conda create --name new_env --clone old_env 
+conda remove --name old_env --all
+
 # activate an env from conda
 . ~/.bashrc
 conda activate gpuenv

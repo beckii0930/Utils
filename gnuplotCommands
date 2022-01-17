@@ -1,0 +1,7 @@
+plot "pt1.ts" using 1:3
+set style data lines
+set title 
+set title "pt1 snf2 Total system E"
+set xlabel 
+set xlabel "Time Step"
+set ylabel "Energy (kJ)"

@@ -66,4 +66,7 @@ python script.py
 
 #### Add local environment to Jupyter notebook using ipykernel
 pip install --user ipykernel
+
+# Activate the env before starting jupyter notebook
+source activate myenv
 python -m ipykernel install --user --name=myenv

@@ -14,10 +14,11 @@ conda activate gpuenv
 conda deactivate 
 
 #download package with specific version 
-conda install scipy=1.1.0 sklearn=0.20.1 theano=1.0.3 keras=2.2.4 
+conda install scipy=1.1.0 theano=1.0.3 keras=2.2.4 
 
 #Example packages for gpuenv that I need. You can install packages needed for your application.
-conda install -c conda-forge scipy scikit-learn keras pandas h5py matplotlib cudatoolkit cudnn tensorflow-gpu
+conda install -c conda-forge aesara-theano-fallback 
+conda install -c conda-forge scikit-learn keras pandas h5py matplotlib cudatoolkit cudnn tensorflow-gpu
 
 # Check list of packages
 conda env list

@@ -1,0 +1,88 @@
+############################################# Make sure the gpu is there, run: #############################################
+1. NVIDA DRIVER: 
+nvidia-smi
+2. CUDA:
+nvcc --version
+3. CuDNN: 
+/sbin/ldconfig -N -v $(sed ‘s/:/ /’ <<< $LD_LIBRARY_PATH) 2>/dev/null | grep libcudnn
+
+# Otherwise:
+1. clean up by removing existing gpu downloads
+sudo rm /etc/apt/sources.list.d/cuda*
+sudo apt remove --autoremove nvidia-cuda-toolkit
+sudo apt remove --autoremove nvidia-*
+
+sudo rm /etc/apt/sources.list.d/cuda*
+sudo apt remove --autoremove nvidia-cuda-toolkit
+sudo apt remove --autoremove nvidia-*
+
+sudo rm -rf /usr/local/cuda*
+
+2. install
+sudo apt update
+sudo add-apt-repository ppa:graphics-drivers
+sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
+sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'
+
+sudo apt update
+sudo apt install cuda-11-3
+sudo apt install libcudnn8
+
+3. Add cuda to path in the .profile file
+sudo vim ~/.profile
+
+# set PATH for cuda 10.1 installation
+if [ -d "/usr/local/cuda-10.1/bin/" ]; then
+    export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
+    export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
+
+4. REBOOT! and check if gpu is there again follow the top command
+
+# create conda env for gpu
+conda create -n gpuenv
+
+#############################################  Setup CUDA #############################################
+1. set path for libraries
+sudo vim ~/.bashrc
+export PATH=/usr/local/cuda-11.3/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.3/lib:$LD_LIBRARY_PATH
+source ~/.bashrc
+2. check cuda works
+nvcc -V
+
+############################################# SETUP CUDNN #############################################
+1. To run gpu, we need cudnn.h. Below shows how to install cudnn for v11.3
+
+tar -zxvf cudnn-11.3-linux-x64-v8.2.0.53.tgz
+sudo cp cuda/lib64/* /usr/local/cuda/lib64/
+sudo cp cuda/include/* /usr/local/cuda/include/
+sudo chmod a+r /usr/local/cuda/include/cudnn.h
+sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
+
+2. check cuda version is correct, (cudnn major should be 8)
+
+cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
+
+############################################# SETUP TensorRT #############################################
+1. Download at https://developer.nvidia.com/tensorrt (Need to register for NVDIA developer account)
+The version I downloaded is "TensorRT 8.2 GA for Ubuntu 20.04 and CUDA 11.1, 11.2 & 11.3 DEB local repo package"
+
+sudo dpkg -i nv-tensorrt-repo-ubuntu1804-cuda11.4-trt8.2.3.0-ga-20220113_1-1_amd64.deb
+sudo apt-key add /var/nv-tensorrt-repo-ubuntu1804-cuda11.4-trt8.2.3.0-ga-20220113/7fa2af80.pub
+
+############################################# SETUP TensorRT #############################################
+1. we use pip to install tensor
+
+sudo apt install python3-pip
+pip3 install tensorflow
+
+2. invoke python3 on command line and try import the tensor package. 
+Makr sure the tf.config doesn't report any errors and "[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]" is shown
+python3
+>> import tensorflow as tf
+>> tf.config.list_physical_devices("GPU")
+
+############################################# JUpyter #############################################
+Run Jupyter and tensorflow is ready to use

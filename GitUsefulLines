@@ -5,3 +5,7 @@ git reset --hard origin/main
 ## git untrack files
 git rm --cached *.txt
  git check-ignore -v debug.test
+
+# When adding your personal repository, need to configure email:
+git config --global user.email {ID}+{username}@users.noreply.github.com
+This github email address can be found in Settings> Access > Emails > Primary Email Address texts

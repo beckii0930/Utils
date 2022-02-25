@@ -29,7 +29,7 @@ ax.set_xlabel('Model ID')
 ax.set_ylabel('Metrics Score')
 ax.set_title("Metrics among Trained Models")
 
-################################# Bar plots #################################
+################################# Horizontal Bar plots #################################
 ax = sns.barplot(data=df_sorted)
 plt.gcf().set_size_inches(35, 8)
 
@@ -38,6 +38,23 @@ ax.set_ylim(-0.6, 0.6)
 ax.set_xlabel('Shape', fontsize=25)
 ax.set_ylabel('Attention Score', fontsize=25)
 ax.set_title("Shape Attention Score Correlations", fontsize=30)
+
+################################# Vertical Bar plots #################################
+df = df.sort_values(by=['Pearson'])
+ax = sns.catplot(y="Shapes",x="Pearson",data=df_sorted, kind="bar", edgecolor=".6", height=10, aspect=.8)
+ax.set_axis_labels("Pearson Correlation", "Shapes", fontsize=18)
+ax.set_yticklabels(fontsize=12)
+ax.set_xticklabels(fontsize=12)
+
+################################# Scatter plots #################################
+import seaborn as sns
+df = pd.DataFrame.from_dict(AllModelScore, orient='index')
+df.index.rename('Observation', inplace=True)
+
+stacked = df.stack().reset_index()
+stacked.rename(columns={'level_1': 'run id', 0: 'Value'}, inplace=True)
+sns.scatterplot(data=stacked, x='Observation', y='Value', hue='run id')
+
 
 ################################# save figure #################################
 plt.tight_layout()

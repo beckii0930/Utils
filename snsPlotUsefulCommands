@@ -1,0 +1,45 @@
+import seaborn as sns
+
+df = pd.DataFrame(All_metrics, columns = ['accuracy_score','precision_score','recall_score'])
+print(df)
+
+################################# Correlation plots #################################
+
+sns.set_theme(style="darkgrid")
+g = sns.lmplot(x="five_mer", y="reverse_comp",data=df);
+plt.gcf().set_size_inches(10, 8)
+plt.title("Attension Score Correlation: \n5-mers vs. Reverse Complements\nafter Normalization", fontsize=15)
+plt.xlabel("5-mers", fontsize=15);
+plt.ylabel("Reverse complement of 5-mers", fontsize=15);
+
+# Add person correlation annotation at position (x, y)
+from scipy import stats
+num = stats.pearsonr(corr['five_mer'], corr['reverse_comp'])[0]
+text = "Pearson Correlation \n= " + f'{num:.5f}'
+plt.text(x, y, text, horizontalalignment='center', size='medium', color='black', weight='semibold')
+
+################################# Line plots #################################
+import pandas as pd
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+g = sns.lineplot(data=df, ax=ax)
+ax.set_ylim(-0.6, 0.6)
+ax.set_xlabel('Model ID')
+ax.set_ylabel('Metrics Score')
+ax.set_title("Metrics among Trained Models")
+
+################################# Bar plots #################################
+ax = sns.barplot(data=df_sorted)
+plt.gcf().set_size_inches(35, 8)
+
+ax.set_xticklabels(ax.get_xticklabels(),rotation = 30, fontsize=20)
+ax.set_ylim(-0.6, 0.6)
+ax.set_xlabel('Shape', fontsize=25)
+ax.set_ylabel('Attention Score', fontsize=25)
+ax.set_title("Shape Attention Score Correlations", fontsize=30)
+
+################################# save figure #################################
+plt.tight_layout()
+fig_path='PATH'
+plt.savefig( fig_path + 'FIG.png', dpi=200)

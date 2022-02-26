@@ -59,4 +59,4 @@ sns.scatterplot(data=stacked, x='Observation', y='Value', hue='run id')
 ################################# save figure #################################
 plt.tight_layout()
 fig_path='PATH'
-plt.savefig( fig_path + 'FIG.png', dpi=200)
+plt.savefig( fig_path + 'FIG.png', dpi=200, bbox_inches='tight')

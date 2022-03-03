@@ -4,7 +4,10 @@ git reset --hard origin/main
 
 ## git untrack files
 git rm --cached *.txt
- git check-ignore -v debug.test
+git check-ignore -v debug.test
+
+## git undo previous commits
+git reset --soft HEAD~1
 
 # When adding your personal repository, need to configure email:
 git config --global user.email {ID}+{username}@users.noreply.github.com

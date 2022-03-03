@@ -6,7 +6,7 @@ git reset --hard origin/main
 git rm --cached *.txt
 git check-ignore -v debug.test
 
-## git undo previous commits
+## git undo the previous commit
 git reset --soft HEAD~1
 
 # When adding your personal repository, need to configure email:

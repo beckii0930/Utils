@@ -1,40 +1,49 @@
 ## conda is an enviroment manager for Python packages. Here, I show how to run jobs with GPU using conda.
 
 # init an environment to run GPU
+```
 conda init bash
 conda create -n gpuenv
-
+```
 # Rename/clone an existing env
+```
 conda create --name new_env --clone old_env 
 conda remove --name old_env --all
-
+```
 # activate an env from conda
+```
 . ~/.bashrc
 conda activate gpuenv
 conda deactivate 
-
-#download package with specific version 
+```
+### download package with specific version 
+```
 conda install scipy=1.1.0 theano=1.0.3 keras=2.2.4 
-
-#Example packages for gpuenv that I need. You can install packages needed for your application.
+```
+### Example packages for gpuenv that I need. You can install packages needed for your application.
+```
 conda install -c conda-forge aesara-theano-fallback 
 conda install -c conda-forge scikit-learn keras pandas h5py matplotlib cudatoolkit cudnn tensorflow-gpu
-
-# Check list of packages
+```
+### Check list of packages
+```
 conda env list
+```
 
 # salloc for testing
+```
 salloc --time=2:00:00 --cpus-per-task=8 --mem=16GB --account=<project_ID>
-
+```
 # load usc modules
+```
 module load usc
 module load anaconda3
 eval "$(conda shell.bash hook)"
-
+```
 #### IMPORTANT: you need to activate your GPU environment (gpuenv) before you can use GPU on your job in cluster!!
 #### Example slurm bash file to run with conda on gpu:
 #### This example submit a machine learning training file train.py and requests 2 GPU nodes.
-
+```
 #!/bin/bash
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=1
@@ -50,8 +59,9 @@ conda activate gpuenv
 module load usc
 module load cuda/10.1.243
 python3 train.py
-
+```
 #### Example bash to run with conda on cpu:
+```
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -63,11 +73,14 @@ module purge
 eval "$(conda shell.bash hook)"
 conda activate myenv
 python script.py
-
+```
 
 #### Add local environment to Jupyter notebook using ipykernel
+```
 pip install --user ipykernel
-
+```
 # Activate the env before starting jupyter notebook
+```
 source activate myenv
 python -m ipykernel install --user --name=myenv
+```

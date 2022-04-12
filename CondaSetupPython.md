@@ -1,16 +1,16 @@
 ## conda is an enviroment manager for Python packages. Here, I show how to run jobs with GPU using conda.
 
-# init an environment to run GPU
+### init an environment to run GPU
 ```
 conda init bash
 conda create -n gpuenv
 ```
-# Rename/clone an existing env
+### Rename/clone an existing env
 ```
 conda create --name new_env --clone old_env 
 conda remove --name old_env --all
 ```
-# activate an env from conda
+### activate an env from conda
 ```
 . ~/.bashrc
 conda activate gpuenv
@@ -30,11 +30,11 @@ conda install -c conda-forge scikit-learn keras pandas h5py matplotlib cudatoolk
 conda env list
 ```
 
-# salloc for testing
+### salloc for testing
 ```
 salloc --time=2:00:00 --cpus-per-task=8 --mem=16GB --account=<project_ID>
 ```
-# load usc modules
+### load usc modules
 ```
 module load usc
 module load anaconda3
@@ -75,11 +75,11 @@ conda activate myenv
 python script.py
 ```
 
-#### Add local environment to Jupyter notebook using ipykernel
+### Add local environment to Jupyter notebook using ipykernel
 ```
 pip install --user ipykernel
 ```
-# Activate the env before starting jupyter notebook
+### Activate the env before starting jupyter notebook
 ```
 source activate myenv
 python -m ipykernel install --user --name=myenv

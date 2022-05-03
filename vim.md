@@ -9,3 +9,9 @@ cntl+v
 I
 #
 press ESC twice to apply to all lines
+
+## select block
+cntl v
+
+## delete
+x

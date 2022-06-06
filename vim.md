@@ -15,3 +15,8 @@ cntl v
 
 ## delete
 x
+
+## copy an entire block
+shift v to select block
+y (yank)
+p (paste) anywhere

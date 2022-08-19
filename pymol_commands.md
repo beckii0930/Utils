@@ -7,4 +7,4 @@ set stick_radius,0.5
 set transparency, 0.25
 
 # Color by B factor
-spectrum b, blue_white_red, minimum=20, maximum=50
+spectrum b, red_yellow_blue, minimum=0, maximum=100

@@ -1,0 +1,14 @@
+1. GO TO https://anaconda.org/ and find the gcc version you want, click into it and follow the gcc install command
+2. Find the conda env path:
+```
+conda create -n 
+```
+This will output the env location
+3. link the sedired gcc executable to gcc so conda finds it
+```
+ln -s /home1/yibeijia/.conda/envs/curves_env/bin/x86_64-conda_cos6-linux-gnu-gcc /home1/yibeijia/.conda/envs/curves_env/bin/gcc
+```
+4. check version with
+```
+gcc -v
+```

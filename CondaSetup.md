@@ -96,6 +96,7 @@ This will output the env location
 ```
 ln -s /home1/yibeijia/.conda/envs/curves_env/bin/x86_64-conda_cos6-linux-gnu-gcc /home1/yibeijia/.conda/envs/curves_env/bin/gcc
 ```
-4. check version with
+4. Restart terminal and check version with
 ```
 gcc -v
+```

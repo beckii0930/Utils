@@ -100,3 +100,13 @@ ln -s /home1/yibeijia/.conda/envs/curves_env/bin/x86_64-conda_cos6-linux-gnu-gcc
 ```
 gcc -v
 ```
+
+# To Open JUpyter Notebook from cluster:
+
+```
+jupyter notebook --no-browser --port=8080
+ssh -L 8080:localhost:8080 usename@discovery1.usc.edu
+```
+
+on the browser, go to link shown by jupter notebook at the end of output, like
+http://localhost:8889/?token=d76d63f347c52979a1e7c2dbab8dd5c247aca4bf11ae51a5

@@ -110,3 +110,9 @@ ssh -L 8080:localhost:8080 usename@discovery1.usc.edu
 
 on the browser, go to link shown by jupter notebook at the end of output, like
 http://localhost:8889/?token=d76d63f347c52979a1e7c2dbab8dd5c247aca4bf11ae51a5
+
+# Recover deleted env
+```
+conda activate /path/to/old_env, eg.~/.conda/envs/old_env
+(old_env) $ conda env export > env.yaml
+(old_env) $ conda env create --file env.yaml --name new_env

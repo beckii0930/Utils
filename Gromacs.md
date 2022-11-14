@@ -67,10 +67,14 @@ gmx_mpi trjcat -f ${cat_fn} -cat -o ${fn}${s}${e}.trr -settime < trjcat.inp
 
 mkdir pdbs_yb
 rm pdbs_yb/*
-# trjconv extract pdbs for group of interest for analysis
-gmx_mpi trjconv -s ${fn}${s}.tpr -sep -f ${fn}${s}${e}.trr -pbc cluster -o pdbs_yb/pr${s}${e}_.pdb -dt 100 -n complex.ndx << EOF
-9
-DNA
-EOF
 
+# trjconv extract pdbs for group of interest for analysis
+if [[ ${fn} == *"dna"* ]]; then
+	gmx_mpi trjconv -s ${fn}${s}.tpr -sep -f ${fn}${s}${e}.trr -pbc cluster -o pdbs_yb/pr${s}${e}_.pdb -dt 100 -n complex.ndx < trjconv_dna.inp
+fi
+if [[ ${fn} != *"dna"* ]]; then
+	gmx_mpi trjconv -s ${fn}${s}.tpr -sep -f ${fn}${s}${e}.trr -pbc cluster -o pdbs_yb/pr${s}${e}_.pdb -dt 100 -n complex.ndx < trjconv_pro.inp
+fi
+# echo -e "DNA_NA\nDNA" > trjconv_dna.inp
+# echo -e "DNA_NA_Protein\nDNA" > trjconv_pro.inp
 ```

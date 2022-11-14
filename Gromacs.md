@@ -38,3 +38,39 @@ gmx_mpi trjconv -f md_0_1.trr -s md_0_1.tpr -o 4ihv.pdb -pbc nojump -center -sep
 echo "5 0" | gmx trjconv -f md.xtc -s md.tpr -o nvt_trjout_first_frame.gro -pbc mol -center -e 1 -ur compact
 echo "5 0" | gmx trjconv -f md.xtc -s md.tpr -o nvt_trjout_first_frame.gro -pbc mol -center -b 2000 -ur compact
 ```
+### Concatenate Trajectory without interaction
+```
+# prefix for trajectories, eg 2r5y_dna_pr1, 2r5y_dna_pr2, ... etc
+fn=2r5y_dna_pr
+
+# specify the trajectory range
+s=1
+e=2
+
+# make trjcat input
+trjin=""
+cat_fn=""
+for (( i=${s}; i<${e}; i++ ))
+do
+	trjin+="c\n"
+	cat_fn+="${fn}${i}.trr "
+done
+trjin+="c"
+cat_fn+="${fn}${e}.trr"
+
+# make input to be c /n c so that it continues from the previous simulation time
+echo -e "$trjin" > trjcat.inp
+echo "Concatenating the following: ${cat_fn}"
+
+# trjcat
+gmx_mpi trjcat -f ${cat_fn} -cat -o ${fn}${s}${e}.trr -settime < trjcat.inp
+
+mkdir pdbs_yb
+rm pdbs_yb/*
+# trjconv extract pdbs for group of interest for analysis
+gmx_mpi trjconv -s ${fn}${s}.tpr -sep -f ${fn}${s}${e}.trr -pbc cluster -o pdbs_yb/pr${s}${e}_.pdb -dt 100 -n complex.ndx << EOF
+9
+DNA
+EOF
+
+```

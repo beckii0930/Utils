@@ -38,7 +38,7 @@ gmx_mpi trjconv -f md_0_1.trr -s md_0_1.tpr -o 4ihv.pdb -pbc nojump -center -sep
 echo "5 0" | gmx trjconv -f md.xtc -s md.tpr -o nvt_trjout_first_frame.gro -pbc mol -center -e 1 -ur compact
 echo "5 0" | gmx trjconv -f md.xtc -s md.tpr -o nvt_trjout_first_frame.gro -pbc mol -center -b 2000 -ur compact
 ```
-### Concatenate Trajectory without interaction
+### Concatenate Trajectory without interaction > trjconv.sh
 ```
 # prefix for trajectories, eg 2r5y_dna_pr1, 2r5y_dna_pr2, ... etc
 fn=2r5y_dna_pr

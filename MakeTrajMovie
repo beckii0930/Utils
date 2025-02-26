@@ -33,6 +33,7 @@ cd ..
 smooth protein, 30, 3
 intra_fit protein
 Then highlight all the interactions we want to visualize
+mset 2-200
 
 Movie -> Export Movie as mpeg
 ffmpeg -i frame%04d.png -c:v libx264 movie.mp4

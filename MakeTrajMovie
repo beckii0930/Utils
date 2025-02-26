@@ -34,6 +34,8 @@ smooth protein, 30, 3
 intra_fit protein
 Then highlight all the interactions we want to visualize
 mset 2-200
+movie.add_scenes(None,0.0,rock=0,start=1)
+movie.add_state_loop(1, 0, start=68)
 
 Movie -> Export Movie as mpeg
 ffmpeg -i frame%04d.png -c:v libx264 movie.mp4
